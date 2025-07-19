@@ -61,7 +61,6 @@ class OrderController {
                 .select("orders.id", "orders.table_session_id", "orders.product_id", "products.name", "orders.price", "orders.quantity")
                 .join("products", "products.id", "orders.product_id")
                 .where({ table_session_id: id })
-                .first()
 
             if (!order) {
                 throw new AppError('The order does not exist')

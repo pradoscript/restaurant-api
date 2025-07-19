@@ -52,10 +52,10 @@ class TableSessionController {
                 throw new AppError('Session already closed or does not exist')
             }
 
-            await knexInstance<TableSessionsRepository>("table_sessions").update({ closed_at: knexInstance.fn.now() }).where({ id })
+            const sessionClosed = await knexInstance<TableSessionsRepository>("table_sessions").update({ closed_at: knexInstance.fn.now() }).where({ id })
 
 
-            return response.json(sessionToBeClosed)
+            return response.json({ message: 'The session has been closed!' })
         } catch (error) {
             next(error)
         }
